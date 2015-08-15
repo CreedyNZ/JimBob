@@ -398,8 +398,7 @@ const short cInitPosZ[]  = {
 boolean g_fShowDebugPrompt;
 boolean g_fDebugOutput;
 boolean g_fEnableServos = true;
-int  g_DBGString1;
-int  g_DBGString2;
+
 //--------------------------------------------------------------------
 //[REMOTE]
 #define cTravelDeadZone         4                 //The deadzone for the analog input from the remote
@@ -737,8 +736,6 @@ void loop(void)
         g_InputController.ControlInput();
     }
     WriteOutputs();                               // Write Outputs
-    DBGSerial.println(g_DBGString1, DEC );
-    DBGSerial.println(g_DBGString2, DEC );
     // We should be able to minimize processor usage when the robot is not logically on
     // or was not on before this call...
     if (g_InControlState.fRobotOn || g_InControlState.fPrev_RobotOn)
