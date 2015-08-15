@@ -649,10 +649,10 @@ void setup()
     delay(10);
 
     //Turning off all the leds
-    LedA = 0;
-    LedB = 0;
-    LedC = 0;
-    Eyes = 0;
+    //LedA = 0;
+    // = 0;
+    // = 0;
+    // = 0;
 
   // Setup Init Positions
     for (LegIndex= 0; LegIndex < CNT_LEGS; LegIndex++ )
@@ -689,10 +689,10 @@ void setup()
     g_InControlState.GaitStep = 1;
     GaitSelect();
 
-#ifdef cTurretRotPin
-    g_InControlState.TurretRotAngle1 = cTurretRotInit;      // Rotation of turrent in 10ths of degree
-    g_InControlState.TurretTiltAngle1 = cTurretTiltInit;    // the tile for the turret
-#endif
+//#ifdef cTurretRotPin
+//    g_InControlState.TurretRotAngle1 = cTurretRotInit;      // Rotation of turrent in 10ths of degree
+//    g_InControlState.TurretTiltAngle1 = cTurretTiltInit;    // the tile for the turret
+//#endif
 
     g_InputController.Init();
 
@@ -884,8 +884,8 @@ void loop(void)
         CheckAngles();
 
         //Write IK errors to leds
-        LedC = IKSolutionWarning;
-        LedA = IKSolutionError;
+     //   LedC = IKSolutionWarning;
+     //   LedA = IKSolutionError;
     }
 
     //Drive Servos
@@ -898,7 +898,7 @@ void loop(void)
             XBeePlaySounds(3, 60, 2000, 80, 2250, 100, 2500);
 #endif
 
-            Eyes = 1;
+         //   Eyes = 1;
         }
 
         //Calculate Servo Move time
@@ -1033,7 +1033,7 @@ void loop(void)
     } 
     else {
       g_ServoDriver.FreeServos();
-      Eyes = 0;
+      //Eyes = 0;
     }
 
     // Allow the Servo driver to do stuff durint our idle time
