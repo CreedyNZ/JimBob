@@ -238,7 +238,8 @@ void CommanderInputController::ControlInput(void)
             || (abs(command.rightH) >= cTravelDeadZone)
             || (abs(command.rightV) >= cTravelDeadZone);
         // [SWITCH MODES]
-        g_DBGString("LH %w LV %x RH %y RV %z",command.leftH,command.leftV,command.rightH,command.rightV );
+        g_DBGString1(command.leftH);
+        g_DBGString2(command.leftV);
         // Cycle through modes...
         if ((command.buttons & BUT_LT) && !(buttonsPrev & BUT_LT))
         {
