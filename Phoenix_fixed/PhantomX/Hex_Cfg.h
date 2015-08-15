@@ -66,9 +66,6 @@
 #define OPT_PCMSOUND
 
 
-// Use PCM Sound to play notes
-#define OPT_PCMSOUND
-
 //===================================================================
 // Debug Options
 #ifdef DBGSerial
@@ -108,11 +105,11 @@
 #define DISP_VOLTAGE_TIME  1000  // how often to check and report in millis
 //--------------------------------------------------------------------
 //[Arbotix Pin Numbers]
-#define SOUND_PIN    1 //0xff        // Tell system we have no IO pin...
-#define PS2_DAT      A0        
-#define PS2_CMD      A1
-#define PS2_SEL      A2
-#define PS2_CLK      A3
+//#define SOUND_PIN    1 //0xff        // Tell system we have no IO pin...
+//#define PS2_DAT      A0        
+//#define PS2_CMD      A1
+//#define PS2_SEL      A2
+//#define PS2_CLK      A3
 
 // Define Analog pin and minimum voltage that we will allow the servos to run
 //#define cVoltagePin  7      // Use our Analog pin jumper here...
@@ -323,8 +320,8 @@ extern const byte g_abHexMaxBodyY[] PROGMEM;
 #define cLFInitPosZ     -CHexInitXZSin60
 
 // Turret initial position
-#define cTurretRotInit  0
-#define cTurretTiltInit 0
+//#define cTurretRotInit  0
+//#define cTurretTiltInit 0
 
 
 //--------------------------------------------------------------------

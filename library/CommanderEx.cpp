@@ -380,8 +380,8 @@ int Commander::ReadMsgs()
             rightV = (signed char)( (int)vals[2]-128 );
             rightH = (signed char)( (int)vals[3]-128 );
         }
-        pan = (vals[0]<<8) + vals[1];
-        tilt = (vals[2]<<8) + vals[3];
+        //pan = (vals[0]<<8) + vals[1];
+        //tilt = (vals[2]<<8) + vals[3];
         buttons = vals[4];
         ext = vals[5];
         fValidPacket = false;                     // clear out so we know if something new comes in

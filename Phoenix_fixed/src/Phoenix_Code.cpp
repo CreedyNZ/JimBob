@@ -424,10 +424,10 @@ short           LegPosZ[CNT_LEGS];                //Actual Z Posion of the Leg
 //[GP PLAYER]
 //--------------------------------------------------------------------
 //[OUTPUTS]
-boolean         LedA;                             //Red
-boolean         LedB;                             //Green
-boolean         LedC;                             //Orange
-boolean         Eyes;                             //Eyes output
+//boolean         LedA;                             //Red
+//boolean         LedB;                             //Green
+//boolean         LedC;                             //Orange
+//boolean         Eyes;                             //Eyes output
 //--------------------------------------------------------------------
 //[VARIABLES]
 byte            Index;                            //Index universal used

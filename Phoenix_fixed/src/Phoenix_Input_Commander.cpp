@@ -110,7 +110,7 @@ extern "C"
 
 #define cTravelDeadZone 4                         //The deadzone for the analog input from the remote
 
-#define ARBOTIX_TO  1000                          // if we don't get a valid message in this number of mills turn off
+#define ARBOTIX_TO  2000                          // if we don't get a valid message in this number of mills turn off
 
 //=============================================================================
 // Global - Local to this file only...
@@ -180,7 +180,7 @@ char szDevice[] = "/dev/ttyXBEE";
 // If both PS2 and XBee are defined then we will become secondary to the xbee
 void CommanderInputController::Init(void)
 {
-    //  DBGSerial.println("Init Commander Start");
+    DBGSerial.println("Init Commander Start");
     g_BodyYOffset = 0;
     g_BodyYShift = 0;
     command.begin(szDevice, B38400);
@@ -238,7 +238,7 @@ void CommanderInputController::ControlInput(void)
             || (abs(command.rightH) >= cTravelDeadZone)
             || (abs(command.rightV) >= cTravelDeadZone);
         // [SWITCH MODES]
-
+        DBGSerial.println("LH %w LV %x RH %y RV %z",command.leftH,command.leftV,command.rightH,command.rightV );
         // Cycle through modes...
         if ((command.buttons & BUT_LT) && !(buttonsPrev & BUT_LT))
         {

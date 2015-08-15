@@ -59,8 +59,8 @@ class Commander
         signed char leftV;                       // vertical stick movement = tilt
         signed char leftH;                       // horizontal stick movement = pan (when we run out of pan, turn body?)
         // 0-1023, use in extended mode
-        int pan;
-        int tilt;
+        //int pan;
+        //int tilt;
 
         // buttons are 0 or 1 (PRESSED), and bitmapped
         unsigned char buttons;                    //
