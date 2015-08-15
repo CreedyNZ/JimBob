@@ -398,8 +398,8 @@ const short cInitPosZ[]  = {
 boolean g_fShowDebugPrompt;
 boolean g_fDebugOutput;
 boolean g_fEnableServos = true;
-long  g_DBGString1;
-long  g_DBGString2;
+int  g_DBGString1;
+int  g_DBGString2;
 //--------------------------------------------------------------------
 //[REMOTE]
 #define cTravelDeadZone         4                 //The deadzone for the analog input from the remote
