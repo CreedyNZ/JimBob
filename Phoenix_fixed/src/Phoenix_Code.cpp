@@ -737,8 +737,8 @@ void loop(void)
         g_InputController.ControlInput();
     }
     WriteOutputs();                               // Write Outputs
-    DBGSerial.println("lh x% lv Y%", g_DBGString1, g_DBGString2 );
-
+    DBGSerial.println(g_DBGString1, DEC );
+    DBGSerial.println(g_DBGString2, DEC );
     // We should be able to minimize processor usage when the robot is not logically on
     // or was not on before this call...
     if (g_InControlState.fRobotOn || g_InControlState.fPrev_RobotOn)
