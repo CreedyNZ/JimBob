@@ -239,7 +239,7 @@ void CommanderInputController::ControlInput(void)
             || (abs(command.rightV) >= cTravelDeadZone);
         // [SWITCH MODES]
         DBGSerial.println(command.leftV, DEC);
-        DBGSerial.println(command.rightH, DEC);
+        DBGSerial.println(command.leftH, DEC);
         // Cycle through modes...
         if ((command.buttons & BUT_LT) && !(buttonsPrev & BUT_LT))
         {
@@ -276,7 +276,7 @@ void CommanderInputController::ControlInput(void)
             if (g_BodyYOffset>0)
                 g_BodyYOffset = 0;
             else
-                g_BodyYOffset = 35;
+                g_BodyYOffset = 50;
         }
 
         // We will use L6 with the Right joystick to control both body offset as well as Speed...
@@ -370,7 +370,7 @@ void CommanderInputController::ControlInput(void)
             else
             {
                 g_InControlState.TravelLength.x = -command.leftH;
-                g_InControlState.TravelLength.z = command.leftV;
+                g_InControlState.TravelLength.z = -command.leftV;
             }
 
             if (!DoubleTravelOn)                  //(Double travel length)
