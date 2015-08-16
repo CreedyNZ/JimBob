@@ -194,6 +194,9 @@ void CommanderInputController::Init(void)
     //  DBGSerial.println("Init Commander End");
 
     SpeakStr("Start");
+    
+    Maestro.setTarget (5,700)
+    Maestro.setTarget (4,100)
 
 }
 
