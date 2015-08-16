@@ -8,8 +8,6 @@ SOURCES = \
 		Phantom_Phoenix.cpp \
 		../src/Phoenix_Code.cpp \
 		../src/Phoenix_Input_Commander.cpp \
-		../src/Maestro.cpp \
-		../src/maestro-app.cpp \
 		../src/Phoenix_Driver_AX12.cpp 
 
 MAIN_OBJS:= $(notdir $(subst .cpp,.o,$(SOURCES)))
