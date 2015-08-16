@@ -13,15 +13,7 @@
 
 #pragma once
 
-#include <Stream.h>
 
-/*! \brief Main Maestro class that handles common functions between the Micro
- *  Maestro and Mini Maestro.
- *
- * The subclasses, MicroMaestro and MiniMaestro inherit all of the functions
- * from Maestro. The Maestro class is not meant to be instantiated directly; use
- * the MicroMaestro or MiniMaestro subclasses instead.
- */
 class Maestro
 {
   public:
@@ -53,24 +45,7 @@ class Maestro
      * @param target A target position from 0 to 254.
      *
      */
-    void setTargetMiniSSC(uint8_t channelNumber, uint8_t target);
-
-    /** \brief Sets the \a target of the servo on \a channelNumber.
-     *
-     * @param channelNumber A servo number from 0 to 127.
-     *
-     * @param target A number from 0 to 16383.
-     *
-     * If the channel is configured as a servo, then the target represents the
-     * pulse width to transmit in units of quarter-microseconds. A \a target
-     * value of 0 tells the Maestro to stop sending pulses to the servo.
-     *
-     * If the channel is configured as a digital output, values less than 6000
-     * tell the Maestro to drive the line low, while values of 6000 or greater
-     * tell the Maestro to drive the line high.
-     *
-     * The compact protocol is used by default. If the %deviceNumber was given
-     * to the constructor, it uses the Pololu protocol.
+    
      */
     void setTarget(uint8_t channelNumber, uint16_t target);
 
@@ -164,8 +139,7 @@ class Maestro
     * This should be considered a private implementation detail of the library.
     **/
   protected:
-    Maestro(Stream &stream,
-            uint8_t resetPin,
+    Maestro(uint8_t resetPin,
             uint8_t deviceNumber,
             bool CRCEnabled);
 
@@ -194,108 +168,8 @@ class Maestro
     uint8_t _resetPin;
     bool _CRCEnabled;
     uint8_t _CRCByte;
-    Stream *_stream;
 };
 
-class MicroMaestro : public Maestro
-{
-  public:
-    /** \brief Create a MicroMaestro object.
-     *
-     * @param stream A class that descends from Stream, like SoftwareSerial or
-     * one of the Hardware Serial ports.
-     *
-     * @param resetPin The pin used by reset() to reset the Maestro. The default
-     * value is Maestro::noResetPin, which makes reset() do nothing.
-     *
-     * @param deviceNumber The device number configured on the Serial Settings
-     * tab in the Maestro Control Center. When deviceNumber is anything but
-     * Maestro::deviceNumberDefault, the Maestro communicates via the Pololu
-     * protocol. Otherwise, it uses the Compact protocol.
-     *
-     * @param CRCEnabled When true, the object computes the CRC value for a
-     * command packet and sends it at the end. The Maestro also has to have the
-     * Enable CRC option checked on the Serial Settings tab of the Maestro
-     * Control Center.
-     */
-    MicroMaestro(Stream &stream,
-                 uint8_t resetPin = noResetPin,
-                 uint8_t deviceNumber = deviceNumberDefault,
-                 bool CRCEnabled = false);
-};
 
-class MiniMaestro : public Maestro
-{
-  public:
-    /** \brief Create a MiniMaestro object.
-     *
-     * @param stream A class that descends from Stream, like SoftwareSerial or
-     * one of the Hardware Serial ports.
-     *
-     * @param resetPin The pin used by reset() to reset the Maestro. The default
-     * value is Maestro::noResetPin, which makes reset() do nothing.
-     *
-     * @param deviceNumber The device number configured on the Serial Settings
-     * tab in the Maestro Control Center. When deviceNumber is anything but
-     * Maestro::deviceNumberDefault, the Maestro communicates via the Pololu
-     * protocol. Otherwise, it uses the Compact protocol.
-     *
-     * @param CRCEnabled When true, the object computes the CRC value for a
-     * command packet and sends it at the end. The Maestro also has to have the
-     * Enable CRC option checked on the Serial Settings tab of the Maestro
-     * Control Center.
-     *
-     * The MiniMaestro object adds serial commands only availabe on the Mini
-     * Maestro servo controllers: setPWM and setMultiTarget.
-     */
-    MiniMaestro(Stream &stream,
-                uint8_t resetPin = noResetPin,
-                uint8_t deviceNumber = deviceNumberDefault,
-                bool CRCEnabled = false);
 
-    /** \brief Sets the PWM specified by \a onTime and \a period in units of
-     * 1/48 microseconds.
-     *
-     * @param onTime A number from 0 to 16320.
-     *
-     * @param period A number from 4 to 16384.
-     *
-     * Sets the PWM output to the specified on time and period, in units of 1/48
-     * microseconds.
-     *
-     * See the Serial Interface section in the [Maestro User's
-     * Guide](http://www.pololu.com/docs/0J40) for more details.
-     *
-     * The compact protocol is used by default. If the %deviceNumber was given
-     * to the constructor, it uses the Pololu protocol.
-     */
-    void setPWM(uint16_t onTime, uint16_t period);
 
-    /** \brief Sets multiple targets starting with the channel specified by \a
-     *  firstChannel to a list of values listed in \a targetList for a
-     *  contiguous block of channels specified by \a numberOfTargets.
-     *
-     * @param numberOfTargets A number from 0 to 24.
-     *
-     * @param firstChannel A channel number from 0 to (24 -
-     * \a numberOfTargets)
-     *
-     * @param targetList An array of numbers from 0 to 16383.
-     *
-     * The target value representation based on the channel's configuration
-     * (servo and output) is the same as the Set Target command.
-     *
-     * See the Serial Interface section in the [Maestro User's
-     * Guide](http://www.pololu.com/docs/0J40) for more details.
-     *
-     * The compact protocol is used by default. If the %deviceNumber was given
-     * to the constructor, it uses the Pololu protocol.
-     */
-    void setMultiTarget(uint8_t numberOfTargets,
-                        uint8_t firstChannel,
-                        uint16_t *targetList);
-
-  private:
-    static const uint8_t setPwmCommand = 0x8A;
-    static const uint8_t setMultipleTargetsCommand = 0x9F;
-};

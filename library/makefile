@@ -12,7 +12,7 @@ COMMON_SOURCES = \
 		diyxbee.cpp \
 		PWM.cpp \
         JoystickController.cpp \
-        Maestro.cpp\
+        Maestro.cpp \
 		RoboClaw.cpp
 # I believe I have these building now for BBBk
 #ifeq ($(OSTYPE),linux-gnueabihf)

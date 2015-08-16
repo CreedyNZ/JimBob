@@ -2,12 +2,10 @@
 
 #include "Maestro.h"
 
-Maestro::Maestro(Stream &stream,
-                 uint8_t resetPin,
+Maestro::Maestro(uint8_t resetPin,
                  uint8_t deviceNumber,
                  bool CRCEnabled)
 {
-  _stream = &stream;
   _deviceNumber = deviceNumber;
   _resetPin = resetPin;
   _CRCEnabled = CRCEnabled;
@@ -29,12 +27,6 @@ void Maestro::reset()
 void Maestro::goHome()
 {
   writeCommand(goHomeCommand);
-  writeCRC();
-}
-
-void Maestro::stopScript()
-{
-  writeCommand(stopScriptCommand);
   writeCRC();
 }
 
@@ -62,37 +54,6 @@ void Maestro::setAcceleration(uint8_t channelNumber, uint16_t acceleration)
   writeCRC();
 }
 
-uint16_t Maestro::getPosition(uint8_t channelNumber)
-{
-  writeCommand(getPositionCommand);
-  write7BitData(channelNumber);
-  writeCRC();
-
-  while (_stream->available() < 2);
-  uint8_t lowerByte = _stream->read();
-  uint8_t upperByte = _stream->read();
-  return (upperByte << 8) | (lowerByte & 0xFF);
-}
-
-uint8_t Maestro::getMovingState()
-{
-  writeCommand(getMovingStateCommand);
-  writeCRC();
-
-  while (_stream->available() < 1);
-  return _stream->read();
-}
-
-uint16_t Maestro::getErrors()
-{
-  writeCommand(getErrorsCommand);
-  writeCRC();
-
-  while (_stream->available() < 2);
-  uint8_t lowerByte = _stream->read();
-  uint8_t upperByte = _stream->read();
-  return (upperByte << 8) | (lowerByte & 0xFF);
-}
 
 
 void Maestro::writeByte(uint8_t dataByte)
@@ -147,46 +108,4 @@ void Maestro::write14BitData(uint16_t data)
   writeByte((data >> 7) & 0x7F);
 }
 
-MicroMaestro::MicroMaestro(Stream &stream,
-                           uint8_t resetPin,
-                           uint8_t deviceNumber,
-                           bool CRCEnabled) : Maestro(stream,
-                                                      resetPin,
-                                                      deviceNumber,
-                                                      CRCEnabled)
-{
-}
 
-MiniMaestro::MiniMaestro(Stream &stream,
-                         uint8_t resetPin,
-                         uint8_t deviceNumber,
-                         bool CRCEnabled) : Maestro(stream,
-                                                    resetPin,
-                                                    deviceNumber,
-                                                    CRCEnabled)
-{
-}
-
-void MiniMaestro::setPWM(uint16_t onTime, uint16_t period)
-{
-  writeCommand(setPwmCommand);
-  write14BitData(onTime);
-  write14BitData(period);
-  writeCRC();
-}
-
-void MiniMaestro::setMultiTarget(uint8_t numberOfTargets,
-                                 uint8_t firstChannel,
-                                 uint16_t *targetList)
-{
-  writeCommand(setMultipleTargetsCommand);
-  write7BitData(numberOfTargets);
-  write7BitData(firstChannel);
-
-  for (int i = 0; i < numberOfTargets; i++)
-  {
-    write14BitData(targetList[i]);
-  }
-
-  writeCRC();
-}
