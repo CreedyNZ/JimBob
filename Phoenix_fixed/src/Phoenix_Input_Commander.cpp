@@ -69,7 +69,7 @@
 #include "Hex_Cfg.h"
 #include "Phoenix.h"
 #include "CommanderEx.h"
-#include "Maestro.h"
+#include "maestro.h"
 
 #ifdef OPT_ESPEAK
 #include "speak.h"
@@ -195,7 +195,7 @@ void CommanderInputController::Init(void)
     //  DBGSerial.println("Init Commander End");
 
     SpeakStr("Start");
-    
+    Maestro maestro;
     Maestro.setTarget(5,700);
     Maestro.setTarget(4,100);
 
