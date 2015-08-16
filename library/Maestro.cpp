@@ -1,6 +1,6 @@
 // Copyright (C) Pololu Corporation.  See LICENSE.txt for details.
 
-#include "PololuMaestro.h"
+#include "Maestro.h"
 
 Maestro::Maestro(Stream &stream,
                  uint8_t resetPin,

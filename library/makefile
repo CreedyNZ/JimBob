@@ -12,7 +12,8 @@ COMMON_SOURCES = \
 		diyxbee.cpp \
 		PWM.cpp \
         JoystickController.cpp \
-		RoboClaw.cpp 
+        Maestro.cpp\
+		RoboClaw.cpp
 # I believe I have these building now for BBBk
 #ifeq ($(OSTYPE),linux-gnueabihf)
 # more files currently on the Raspberry PI

@@ -196,8 +196,8 @@ void CommanderInputController::Init(void)
 
     SpeakStr("Start");
     
-    Maestro.setTarget (5,700);
-    Maestro.setTarget (4,100);
+    Maestro.setTarget(5,700);
+    Maestro.setTarget(4,100);
 
 }
 
