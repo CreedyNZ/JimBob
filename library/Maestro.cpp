@@ -26,13 +26,6 @@ void Maestro::reset()
   }
 }
 
-void Maestro::setTargetMiniSSC(uint8_t channelNumber, uint8_t target)
-{
-  _stream->write(miniSscCommand);
-  _stream->write(channelNumber);
-  _stream->write(target);
-}
-
 void Maestro::goHome()
 {
   writeCommand(goHomeCommand);
@@ -42,22 +35,6 @@ void Maestro::goHome()
 void Maestro::stopScript()
 {
   writeCommand(stopScriptCommand);
-  writeCRC();
-}
-
-void Maestro::restartScript(uint8_t subroutineNumber)
-{
-  writeCommand(restartScriptAtSubroutineCommand);
-  write7BitData(subroutineNumber);
-  writeCRC();
-}
-
-void Maestro::restartScriptWithParameter(uint8_t subroutineNumber,
-                                         uint16_t parameter)
-{
-  writeCommand(restartScriptAtSubroutineWithParameterCommand);
-  write7BitData(subroutineNumber);
-  write14BitData(parameter);
   writeCRC();
 }
 
@@ -117,14 +94,6 @@ uint16_t Maestro::getErrors()
   return (upperByte << 8) | (lowerByte & 0xFF);
 }
 
-uint8_t Maestro::getScriptStatus()
-{
-  writeCommand(getScriptStatusCommand);
-  writeCRC();
-
-  while (_stream->available() < 1);
-  return _stream->read();
-}
 
 void Maestro::writeByte(uint8_t dataByte)
 {

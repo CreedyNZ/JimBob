@@ -13,7 +13,6 @@
 
 #pragma once
 
-#include <Arduino.h>
 #include <Stream.h>
 
 /*! \brief Main Maestro class that handles common functions between the Micro
@@ -130,71 +129,7 @@ class Maestro
      * The compact protocol is used by default. If the %deviceNumber was given
      * to the constructor, it uses the Pololu protocol.
      */
-    void stopScript();
-
-    /** \brief Starts loaded script at specified \a subroutineNumber location.
-     *
-     * @param subroutineNumber A subroutine number defined in script's compiled
-     * code.
-     *
-     * Starts the loaded script at location specified by the subroutine number.
-     * Subroutines are numbered in the order they are defined in loaded script.
-     * Click the "View Compiled Code..." button and look at the subroutine list
-     * to find the number for a particular subroutine.
-     *
-     * See the Serial Interface section in the [Maestro User's
-     * Guide](http://www.pololu.com/docs/0J40) for more details.
-     *
-     * The compact protocol is used by default. If the %deviceNumber was given
-     * to the constructor, it uses the Pololu protocol.
-     */
-    void restartScript(uint8_t subroutineNumber);
-
-    /** \brief Starts loaded script at specified \a subroutineNumber location
-     *  after loading \a parameter on to the stack.
-     *
-     * @param subroutineNumber A subroutine number defined in script's compiled
-     * code.
-     *
-     * @param parameter A number from 0 to 16383.
-     *
-     * Similar to the \p restartScript function, except it loads the parameter
-     * on to the stack before starting the script at the specified subroutine
-     * number location.
-     *
-     * See the Serial Interface section in the [Maestro User's
-     * Guide](http://www.pololu.com/docs/0J40) for more details.
-     *
-     * The compact protocol is used by default. If the %deviceNumber was given
-     * to the constructor, it uses the Pololu protocol.
-     */
-    void restartScriptWithParameter(uint8_t subroutineNumber, uint16_t parameter);
-
-    /** \brief Gets the position of \a channelNumber.
-     *
-     * @param channelNumber A servo number from 0 to 127.
-     *
-     * @return two-byte position value
-     *
-     * If channel is configured as a servo, then the position value represents
-     * the current pulse width transmitted on the channel in units of
-     * quarter-microseconds.
-     *
-     * If the channel is configured as a digital output, a position value less
-     * than 6000 means the Maestro is driving the line low, while a position
-     * value of 6000 or greater means the Maestro is driving the line high.
-     *
-     * If channel is configured as an input, then the position value represents
-     * the voltage measured. Analog inputs for channels 0-11: their values range
-     * from 0 to 1023, representing 0 to 5V. Digital inputs for channels 12-23:
-     * their values are exactly 0 or exactly 1023.
-     *
-     * See the Serial Interface section in the [Maestro User's
-     * Guide](http://www.pololu.com/docs/0J40) for more details.
-     *
-     * The compact protocol is used by default. If the %deviceNumber was given
-     * to the constructor, it uses the Pololu protocol.
-     */
+    
     uint16_t getPosition(uint8_t channelNumber);
 
     /** \brief Gets the moving state for all configured servo channels.
@@ -221,19 +156,7 @@ class Maestro
      * The compact protocol is used by default. If the %deviceNumber was given
      * to the constructor, it uses the Pololu protocol.
      */
-    uint8_t getScriptStatus();
-
-    /** \brief Gets the error register.
-     *
-     * @return Two-byte error code.
-     *
-     * Returns the error register in two bytes then all the error bits are
-     * cleared on the Maestro. See the Errors section of the [Maestro User's
-     * Guide](http://www.pololu.com/docs/0J40) for more details.
-     *
-     * The compact protocol is used by default. If the %deviceNumber was given
-     * to the constructor, it uses the Pololu protocol.
-     */
+    
     uint16_t getErrors();
 
     /** \cond
@@ -265,10 +188,7 @@ class Maestro
     static const uint8_t getMovingStateCommand = 0x93;
     static const uint8_t getErrorsCommand = 0xA1;
     static const uint8_t goHomeCommand = 0xA2;
-    static const uint8_t stopScriptCommand = 0xA4;
-    static const uint8_t restartScriptAtSubroutineCommand = 0xA7;
-    static const uint8_t restartScriptAtSubroutineWithParameterCommand = 0xA8;
-    static const uint8_t getScriptStatusCommand = 0xAE;
+    
 
     uint8_t _deviceNumber;
     uint8_t _resetPin;
