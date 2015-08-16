@@ -69,6 +69,7 @@
 #include "Hex_Cfg.h"
 #include "Phoenix.h"
 #include "CommanderEx.h"
+#include "Maestro.h"
 
 #ifdef OPT_ESPEAK
 #include "speak.h"
