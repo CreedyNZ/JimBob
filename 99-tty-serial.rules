@@ -1,4 +1,0 @@
-SUBSYSTEM=="tty", KERNEL=="ttyO1", SYMLINK+="ttyXBEE"
-SUBSYSTEM=="tty", KERNEL=="ttyO2", SYMLINK+="ttySSC-32"
-
-
