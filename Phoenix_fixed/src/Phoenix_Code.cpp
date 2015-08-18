@@ -515,6 +515,7 @@ byte            bExtraCycle;                      // Forcing some extra timed cy
 
 boolean        g_fRobotUpsideDown;                // Is the robot upside down?
 boolean        fRobotUpsideDownPrev;
+
 //=============================================================================
 // Define our default standard Gaits
 //=============================================================================

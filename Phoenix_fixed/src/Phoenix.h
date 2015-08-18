@@ -88,6 +88,7 @@ extern short SmoothControl (short CtrlMoveInp, short CtrlMoveOut, byte CtrlDivid
 extern boolean          g_fDebugOutput;
 extern boolean          g_fEnableServos;          // Hack to allow me to turn servo processing off...
 extern boolean          g_fRobotUpsideDown;       // Is the robot upside down?
+extern boolean          g_fRobotAutoNav;         // Is the robot in Automode?
 
 extern void MSound(byte cNotes, ...);
 extern boolean CheckVoltage(void);
